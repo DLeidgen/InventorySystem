@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Guitar Shop</title>
+    <link rel="stylesheet" th:href="@{/css/demo.css}">
+</head>
+<body>
+
+<header class="header">
+    <div id="logo">
+        <img th:src="@{/logo.avif}" alt="logo" class="logo"/>
+    </div>
+    <div id="shop">
+        <h1>Guitar Shop</h1>
+    </div>
+</header>
+
+<h1 class="invh1">Inhouse Part Detail</h1>
+<form action="#" th:action="@{/showFormAddInPart}" th:object="${inhousepart}" method="POST"}>
+
+<!-- Add hidden form field to handle update -->
+    <p><input type="hidden" th:field="*{id}"/></p>
+
+<p class="invParts">Part Name: <input type="text" th:field="*{name}" placeholder="Name" class="form-control mb-4 col-4"/></p>
+
+<p class="invParts">Part Price: <input type="text" path="price" th:field="*{price}" placeholder= "Price" class="form-control mb-4 col-4"/></p>
+<p th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Price Error</p>
+
+<p class="invParts">Part Inventory: <input type="text" path="inv" th:field="*{inv}" placeholder="Inventory" class="form-control mb-4 col-4"/></p>
+    <p th:if="${#fields.hasErrors('inv')}" th:errors="*{inv}">Inventory Error</p>
+<p class="invParts">Minimum Inventory: <input type="text" path="minInv" th:field="*{minInv}" placeholder="Min Inventory" class="form-control mb-4 col-4"/></p>
+    <p th:if="${#fields.hasErrors('minInv')}" th:errors="*{minInv}">Min Inventory Error</p>
+<p class="invParts">Maximum Inventory: <input type="text" path="maxInv" th:field="*{maxInv}" placeholder="Max Inventory" class="form-control mb-4 col-4"/></p>
+    <p th:if="${#fields.hasErrors('maxInv')}" th:errors="*{maxInv}">Max Inventory Error</p>
+<p class="invParts">Part ID: <input type="text" th:field="*{partId}" placeholder="Part ID" class="form-control mb-4 col-4"/></p>
+
+<div th:if="${#fields.hasAnyErrors()}">
+    <ul>
+        <li th:each="err: ${#fields.allErrors()}" th:text="${err}">
+
+        </li>
+    </ul>
+</div>
+
+<p><input type="submit" value="Submit" /></p>
+</form>
+<p><errors path="price" cssClass=""error/><p>
+
+<a href="http://localhost:8080/" class="pLink">Link
+    to Main Screen</a>
+</body>
+</html>
